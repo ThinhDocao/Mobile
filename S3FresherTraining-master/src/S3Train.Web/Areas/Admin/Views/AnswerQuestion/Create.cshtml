@@ -1,0 +1,99 @@
+﻿@model S3Train.Web.Models.QuestionViewModels
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section scripts
+{
+    <link href="~/Content/themes/base/jquery.datetimepicker.min.css" rel="stylesheet" />
+    <script src="~/Content/themes/base/jquery.datetimepicker.full.js"></script>
+
+    <script>
+        $('.datepicker').datetimepicker(
+            {
+                theme: 'blue'
+            });
+
+    </script>
+
+}
+
+<h2>Question</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-12 card" style="border:3px solid rgba(0,0,0,.125) ; border-radius:20px;background-color: #decdcd;" id="row_item.Id">
+            <div class="row">
+                <div class="col-2">
+                    <a href="#"><h3 style="color:blueviolet;padding-top:27px"> Tiêu đề</h3> </a>
+
+                </div>
+
+                <div class="col-10">
+                    @Html.TextBoxFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" }, @style = "border:3px solid rgba(0,0,0,.125);width:100%;height:40px;margin-top:20px" })
+                </div>
+
+            </div>
+
+            <br />
+            <div class="row">
+
+                <div class="col-2">
+                    <a href="#"><h3 style="color:blueviolet">Nội dung</h3> </a>
+
+                </div>
+
+                <div class="col-10">
+                    @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" }, @style = "border:3px solid rgba(0,0,0,.125);width:100%;height:250px" })
+                </div>
+
+
+            </div>
+
+            <br />
+            <div class="row">
+
+                <div class="col-2">
+
+
+                </div>
+
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col-1">
+                            <a href="#"><p>Ngày</p></a>
+                        </div>
+                        <div class="col-3">
+                            @Html.EditorFor(m => m.CreateDate, new { htmlAttributes = new { @class = "datepicker" }, @style = "border:black;background:#ccc" })
+                            @Html.ValidationMessageFor(model => model.CreateDate, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-8">
+                            <a href="#" style="padding-left:20px"><p>đăng</p></a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+                
+            <br />
+
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-outline-secondary">
+                <i class="fa fa-save"></i>&nbsp; Save
+            </button>
+
+            <a href="~/Admin/AnswerQuestion">
+                <p class="btn btn-outline-secondary">
+                    <i class="fa fa-reply"></i>&nbsp;Back to list
+                </p>
+            </a>
+        </div>
+    </div>
+
+}

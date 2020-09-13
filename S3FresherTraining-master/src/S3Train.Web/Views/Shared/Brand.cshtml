@@ -1,0 +1,8 @@
+﻿@model List<S3Train.Web.Models.BrandVIewModels>
+
+@foreach (var item in Model)
+{
+
+    <a class="nav-link" href="/dien-thoai/@item.MetaTitle-@item.Id"><img src="@item.Logo" width="170px" height="130px" /></a>
+
+}

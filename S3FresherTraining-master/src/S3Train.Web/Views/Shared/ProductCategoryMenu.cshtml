@@ -1,0 +1,248 @@
+﻿@model List<S3Train.Web.Models.ProductCategoryViewModels>
+
+@{
+    decimal TongTien = 0;
+}
+
+@foreach (var item in Model)
+{
+
+    <li class="nav-item"> 
+        <a class="nav-link"style="color:black" href="/san-pham/@item.MetaTitle/@item.Id"><i><img src="@item.Image" style="width:30px" /> @item.Name</i></a>
+    </li>
+}
+
+@foreach (var menuType in ViewBag.MenuType)
+{
+    foreach (var item in ViewBag.Menu)
+    {
+        if (menuType.Id == item.MenuTypeID && menuType.Name == "Menu chính")
+        {
+            if (item.Text == "GIỎ HÀNG")
+            {
+                <li class="nav-item" style="color:black">
+
+                    <div class="dropdown" style="padding-top:15px">
+                        <a class="nav-link dropbtn"style="color:black" href="/gio-hang"><i><img src="@item.Image" style="width:30px" /> @item.Text</i></a>
+                        <div class="dropdown-content" style="width:300px;padding-top:5px">
+
+                            @foreach (var cart in ViewBag.Cart)
+                            {
+                                TongTien += cart.Product.Price * cart.Quatity;
+                                <div class="float-left" style="border-bottom:4px solid white">
+
+                                    <div>
+                                        <input type="button" class="deleteLayout" data-id="@cart.Product.Id" value="X" style="float:left;height:60px" />
+                                        <img src="@cart.Product.Image" style="width:60px;float:left" />@cart.Product.Name
+                                    </div>
+                                    <div>
+                                        Sl: @cart.Quatity
+                                    </div>
+                                    <div>
+                                        @(cart.Product.Price * cart.Quatity)$
+
+
+                                    </div>
+                                </div>
+
+
+                            }
+                            <div style="background-color:aqua">
+                                Tổng tiền: <b>@TongTien</b>
+                            </div>
+                            <div>
+                                <button style="width:100%" class="btn btn-danger" onclick="window.location.href='/thanh-toan'">Thanh toán</button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            }
+            else if (item.Text == "LOGIN")
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link"style="color:black" href="~/Admin/Product"> <i><img src="@item.Image" style="width:30px" /> @User.Identity.Name.Substring(0,User.Identity.Name.IndexOf("@"))</i></a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        @*<a class="nav-link" href="/login"> <i><img src="@item.Image" style="width:30px" /> @item.Text</i></a>*@
+                        <a href="" class="nav-link"style="color:black" data-toggle="modal" data-target="#modalLRForm">
+                            <i><img src="@item.Image" style="width:30px" /> @item.Text</i>
+                        </a>
+                    </li>
+                }
+
+            }
+            else
+            {
+
+                <li class="nav-item">
+                    <a class="nav-link"style="color:black" href="/san-pham/@item.Link"> <i><img src="@item.Image" style="width:30px" /> @item.Text</i></a>
+                </li>
+            }
+
+        }
+
+    }
+}
+
+<div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Modal cascading tabs-->
+            <div class="modal-c-tabs">
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+                    <li class="nav-item clear">
+                        <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab">
+                            <i class="fas fa-user mr-1"></i>
+                            Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#panel8" role="tab">
+                            <i class="fas fa-user-plus mr-1"></i>
+                            Register
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Tab panels -->
+                <div class="tab-content">
+                    <!--Panel 7-->
+                    <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+
+                        <!--Body-->
+                        <div class="modal-body mb-1">
+                            @{Html.RenderAction("Login", "Account");}
+                            <div class="options text-center text-md-right mt-1">
+                                <p> <a data-toggle="tab" href="#panel10" role="tab" class="blue-text">Login Account</a></p>
+                            </div>
+                        </div>
+                        <!--Footer-->
+                        <div class="modal-footer">
+                            <div class="options text-center text-md-right mt-1">
+                                <p> <a data-toggle="tab" href="#panel9" role="tab" class="blue-text">Forgot Password?</a></p>
+                            </div>
+                            <a href="/" class="btn btn-outline-info waves-effect ml-auto">Close</a>
+                        </div>
+
+                    </div>
+                    <!--/.Panel 7-->
+                    <!--Panel 8-->
+                    <div class="tab-pane fade" id="panel8" role="tabpanel">
+
+                        <!--Body-->
+                        <div class="modal-body">
+                            @{Html.RenderAction("Register", "Account");}
+
+                        </div>
+                        <!--Footer-->
+                        <div class="modal-footer">
+                            <div class="options text-right">
+                            </div>
+                            <a href="/" class="btn btn-outline-info waves-effect ml-auto">Close</a>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="panel9" role="tabpanel">
+
+                        <!--Body-->
+                        <div class="modal-body">
+                            @{Html.RenderAction("ForgotPassword", "Account");}
+
+                        </div>
+                        <!--Footer-->
+                        <div class="modal-footer">
+                            <div class="options text-right">
+                            </div>
+                            <a href="/" class="btn btn-outline-info waves-effect ml-auto">Close</a>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="panel10" role="tabpanel">
+
+                        <!--Body-->
+                        <div class="modal-body">
+                            @using (Html.BeginForm("ExternalLogin", "Home", FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <br />
+                                <button type="submit" id="Google" name="provider" value="Google" title="Log in using your Google account" style="cursor:pointer;" >Google</button>
+                                <br />
+                                <button type="submit" id="Twitter" name="provider" value="Twitter" title="Log in using your Twitter account" style="cursor:pointer;">Twitter</button>
+                                <br />
+                                <button type="submit" id="Facebook" name="provider" value="Facebook" title="Log in using your Facebook account" style="cursor:pointer;">Facebook</button>
+                                <br />
+                                <button type="submit" id="Microsoft" name="provider" value="Microsoft" title="Log in using your Microsoft account" style="cursor:pointer;">Microsoft</button>
+                                <br />
+                                <button type="submit" id="LinkedIn" name="provider" value="LinkedIn" title="Log in using your Facebook account" style="cursor:pointer;">LinkedIn</button>
+                                <br />
+                                <button type="submit" id="GitHub" name="provider" value="GitHub" title="Log in using your Facebook account" style="cursor:pointer;">GitHub</button>
+                            }
+
+                        </div>
+                        <!--Footer-->
+                        <div class="modal-footer">
+                            <div class="options text-right">
+                            </div>
+                            <a href="/" class="btn btn-outline-info waves-effect ml-auto">Close</a>
+                        </div>
+                    </div>
+                    <!--/.Panel 8-->
+                </div>
+
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+
+<style>
+    .dropbtn {
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #ddd;
+            }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+</style>
+

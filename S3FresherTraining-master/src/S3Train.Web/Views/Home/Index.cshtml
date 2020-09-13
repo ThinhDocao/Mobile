@@ -1,0 +1,200 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var ListTopHotAll = ViewBag.TopHotALL;
+    var productCategory = ViewBag.productCategory;
+}
+
+@section scripts{
+    <style>
+    .single-product:hover .product-hover a.add-to-cart-link {
+    top: 24%;
+}
+    </style>
+    
+}
+
+<div class="mainmenu-area">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</div> <!-- End mainmenu area -->
+<div class="slider-area" style="margin-left:15%;margin-top:10px">
+    <!-- Slider -->
+    <div class="block-slider block-slider4">
+        <ul class="" id="bxslider-home4">
+            <li>
+                <img src="~/Assets/img/h4-slide.png" alt="Slide">
+                <div class="caption-group">
+                    <h2 class="caption title">
+                        iPhone <span class="primary">6 <strong>Plus</strong></span>
+                    </h2>
+                    <h4 class="caption subtitle">Dual SIM</h4>
+                    <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
+                </div>
+            </li>
+            <li>
+                <img src="~/Assets/img/h4-slide2.png" alt="Slide">
+                <div class="caption-group">
+                    <h2 class="caption title">
+                        by one, get one <span class="primary">50% <strong>off</strong></span>
+                    </h2>
+                    <h4 class="caption subtitle">school supplies & backpacks.*</h4>
+                    <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
+                </div>
+            </li>
+            <li>
+                <img src="~/Assets/img/h4-slide3.png" alt="Slide">
+                <div class="caption-group">
+                    <h2 class="caption title">
+                        Apple <span class="primary">Store <strong>Ipod</strong></span>
+                    </h2>
+                    <h4 class="caption subtitle">Select Item</h4>
+                    <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
+                </div>
+            </li>
+            <li>
+                <img src="~/Assets/img/h4-slide4.png" alt="Slide">
+                <div class="caption-group">
+                    <h2 class="caption title">
+                        Apple <span class="primary">Store <strong>Ipod</strong></span>
+                    </h2>
+                    <h4 class="caption subtitle">& Phone</h4>
+                    <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- ./Slider -->
+</div> <!-- End slider area -->
+
+<div class="brands-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="brand-wrapper">
+                    <div class="brand-list">
+                        <img src="~/Assets/img/brand1.png" alt="">
+                        <img src="~/Assets/img/brand2.png" alt="">
+                        <img src="~/Assets/img/brand3.png" alt="">
+                        <img src="~/Assets/img/brand4.png" alt="">
+                        <img src="~/Assets/img/brand5.png" alt="">
+                        <img src="~/Assets/img/brand6.png" alt="">
+                        <img src="~/Assets/img/brand1.png" alt="">
+                        <img src="~/Assets/img/brand2.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End brands area -->
+
+<li><a href="#"> <h5>SẢN PHẨM KHUYẾN MÃI HOT NHẤT</h5></a></li>
+<div class="maincontent-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="latest-product">
+
+                    <div class="product-carousel">
+
+                        @foreach (var item in ListTopHotAll)
+                        {
+                        <div class="single-product">
+                            <div class="product-f-image">
+                                <img src="@item.Image" alt="">
+                                <div class="product-hover">
+                                    <a href="/them-gio-hang/@item.Id-1" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                    <a class="view-details-link" href="/chi-tiet/@item.MetaTitle/@item.Id"><i class="fa fa-link"></i> See details</a>
+
+                                </div>
+                            </div>
+
+                            <h2><a class="nav-link" href="/chi-tiet/@item.MetaTitle/@item.Id">@item.Name</a></h2>
+
+                            <div class="product-carousel-price">
+                                <ins>$@item.PromotionPrice</ins> <del>$@item.Price</del>
+                            </div>
+                        </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div> <!-- End main content area -->
+
+@foreach (var proCategory in productCategory)
+{
+
+    <div class="col-md-12">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#"> <h5>@proCategory.Name HOT</h5></a></li>
+                <li><a href="#"><i class="fa fa-user"></i>Điện thoại độc quyền</a></li>
+                <li><a href="chi-tiet/Iphone11ProMax512-30"><i class="fa fa-user"></i> Iphone 11Pro max</a></li>
+                <li><a href="chi-tiet/iphone-102"><i class="fa fa-heart"></i> Iphone 11</a></li>
+                <li><a href="chi-tiet/SamSung-34"><i class="fa fa-user"></i> SamSung Note10+</a></li>
+                <li><a href="san-pham/dien-thoai-4"><i class="fa fa-user"></i>Tất cả điện thoại</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="maincontent-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="latest-product">
+
+                        <div class="product-carousel">
+                            @foreach (var item in ListTopHotAll)
+                            {
+                                if (item.ProductCategoryID == proCategory.Id)
+                                {
+                                    <div class="single-product">
+                                        <div class="product-f-image">
+                                            <img src="@item.Image" alt="">
+                                            <div class="product-hover">
+                                                <a href="/them-gio-hang/@item.Id-1" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                <a class="view-details-link" href="/chi-tiet/@item.MetaTitle/@item.Id"><i class="fa fa-link"></i> See details</a>
+
+                                            </div>
+                                        </div>
+
+                                        <h2><a class="nav-link" href="/chi-tiet/@item.MetaTitle/@item.Id">@item.Name</a></h2>
+
+                                        <div class="product-carousel-price">
+                                            <ins>$@item.PromotionPrice</ins> <del>$@item.Price</del>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div> <!-- End main content area -->
+}
+
+<style>
+    .slid-arr {
+        width: 68%;
+        margin-left: 500px;
+        margin-top: 75px;
+    }
+</style>

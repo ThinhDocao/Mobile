@@ -1,0 +1,122 @@
+﻿@model List<S3Train.Models.ProductViewModel>
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-14">
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            @{Html.RenderAction("Brand", "Home");}
+        </ul>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            @{Html.RenderAction("MenuPrice", "Home");}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="btn-group">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        Tính năng
+                    </button>
+                    <div class="dropdown-menu">
+                        <ul>
+                            <li>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" value="">Option 1
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" value="">Option 2
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" value="" disabled>Option 3
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Smartphone</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        Sắp xếp
+                    </button>
+                    <div class="dropdown-menu">
+                        <ul>
+                            <li>
+                                <a class="dropdown-item" href="#">Nổi bật nhất</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">giá cao đến thấp</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">giá thấp đến cao</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="latest-product">
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-3">
+                        <div class="single-product">
+                            <div class="product-f-image">
+                                <a href="/chi-tiet/@item.MetaTitle/@item.Id"><img src="@item.Image" width="70%" alt=""></a>
+                            </div>
+
+                            <h2><a href="/chi-tiet/@item.MetaTitle/@item.Id">@item.Name</a></h2>
+
+                            <div class="product-carousel-price" style="text-align:center">
+                                <ins>$@item.Price</ins> <del>$@item.PromotionPrice</del>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!--Phan trang-->
+                @*@if(ViewBag.TotalPage >1)
+                    {
+                        var pageDisplay = int.Parse(ViewBag.Maxpage);
+                        int totalPage = (int)ViewBag.TotalPage;
+                        int currentPage = ((int)ViewBag.Page);
+
+                        var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+                        var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+                        var link = "/san-pham/{MetaTitle}-{id}";
+                        <div class="paging">
+                            @if(currentPage  > ViewBag.Fist)
+                            {
+                                <a href="@link&page=@ViewBag.Fisrt" title="trang dau"class="first"><i class="fa fa-angle-double-left"></i></a>
+                                <a href="@link&page=@ViewBag.Prev" title="trang truoc" class="prev"><i class="fa fa-angle-left"></i></a>
+                            }
+
+                    }
+                    else {
+                        <span>không có bản ghi nào </span>
+                    }*@
+
+            </div>
+        </div>
+    </div>
+
+</div> <!-- End main content area -->

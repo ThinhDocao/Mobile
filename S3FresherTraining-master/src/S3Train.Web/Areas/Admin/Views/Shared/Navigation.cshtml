@@ -1,0 +1,236 @@
+﻿@{ 
+    var role = ViewBag.Name;
+    var productCategory = ViewBag.productCategory;
+    var gg = 1;
+}
+
+<header class="header-mobile d-block d-lg-none">
+    <div class="header-mobile__bar">
+        <div class="container-fluid">
+            <div class="header-mobile-inner">
+                <a class="logo" href="index.html">
+                    <img src="/Content/images/icon/logo.png" alt="CoolAdmin" />
+                </a>
+                <button class="hamburger hamburger--slider" type="button">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar-mobile">
+        <div class="container-fluid">
+            <ul class="navbar-mobile__list list-unstyled">
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-tachometer-alt"></i>Thông tin cửa hàng
+                    </a>
+                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                        <li>
+                            <a href="index.html">1</a>
+                        </li>
+                        <li>
+                            <a href="index2.html">2</a>
+                        </li>
+                        <li>
+                            <a href="index3.html">3</a>
+                        </li>
+                        <li>
+                            <a href="index4.html">4</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="chart.html">
+                        <i class="fas fa-chart-bar"></i>Doanh số thu nhập
+                    </a>
+                </li>
+                <li>
+                    <a href="table.html">
+                        <i class="fas fa-table"></i>Quản lý nhân viên
+                    </a>
+                </li>
+                <li>
+                    <a href="form.html">
+                        <i class="far fa-check-square"></i>Tin tức kỹ thuật
+                    </a>
+                </li>
+                <li>
+                    <a href="calendar.html">
+                        <i class="fas fa-calendar-alt"></i>Danh mục
+                    </a>
+                </li>
+                <li>
+                    <a href="map.html">
+                        <i class="fas fa-map-marker-alt"></i>Sản phẩm
+                    </a>
+                </li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-copy"></i>Khách hàng
+                    </a>
+                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                        <li>
+                            <a href="login.html"></a>
+                        </li>
+                        <li>
+                            <a href="register.html"></a>
+                        </li>
+                        <li>
+                            <a href="forget-pass.html"></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-desktop"></i>Đơn hàng
+                    </a>
+                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                        <li>
+                            <a href="button.html">Button</a>
+                        </li>
+                        <li>
+                            <a href="badge.html">Badges</a>
+                        </li>
+                        <li>
+                            <a href="tab.html">Tabs</a>
+                        </li>
+                        <li>
+                            <a href="card.html">Cards</a>
+                        </li>
+                        <li>
+                            <a href="alert.html">Alerts</a>
+                        </li>
+                        <li>
+                            <a href="progress-bar.html">Progress Bars</a>
+                        </li>
+                        <li>
+                            <a href="modal.html">Modals</a>
+                        </li>
+                        <li>
+                            <a href="switch.html">Switchs</a>
+                        </li>
+                        <li>
+                            <a href="grid.html">Grids</a>
+                        </li>
+                        <li>
+                            <a href="fontawesome.html">Fontawesome Icon</a>
+                        </li>
+                        <li>
+                            <a href="typo.html">Typography</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-map-marker-alt"></i>Hỏi đáp
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-map-marker-alt"></i>Hình ảnh
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<!-- END HEADER MOBILE-->
+<!-- MENU SIDEBAR-->
+<aside class="menu-sidebar d-none d-lg-block">
+    <div class="logo">
+        <a href="#">
+            <img src="/Content/images/icon/logo.png" alt="Cool Admin" />
+        </a>
+    </div>
+    <div class="menu-sidebar__content js-scrollbar1">
+        <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar__list">
+                @foreach (var item in role)
+                {
+                    if (item.Name == "Admin")
+                    {
+                <li >
+                    <a href="~/Admin/FooterClient">
+                        <i class="fas fa-tachometer-alt"></i>Footer
+                    </a>
+                    @*<ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a href="index.html">Dashboard 1</a>
+                        </li>
+                        <li>
+                            <a href="index2.html">Dashboard 2</a>
+                        </li>
+                        <li>
+                            <a href="index3.html">Dashboard 3</a>
+                        </li>
+                        <li>
+                            <a href="index4.html">Dashboard 4</a>
+                        </li>
+                    </ul>*@
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-chart-bar"></i>Statistical
+                    </a>
+                </li>
+                        <li>
+                            <a href="~/Admin/Employee">
+                                <i class="fas fa-table"></i>Employee
+                            </a>
+                        </li>
+                    }
+
+                }
+                <li>
+                    <a href="~/Admin/Customer">
+                        <i class="fas fa-table"></i>Customer
+                    </a>
+                </li>
+                <li>
+                    <a href="~/Admin/ProductCategory">
+                        <i class="fas fa-calendar-alt"></i>Category
+                    </a>
+                </li>
+                <li>
+                    <a href="~/Admin/Brand">
+                        <i class="fas fa-calendar-alt"></i>Brand
+                    </a>
+                </li>
+                <li>
+                    <a href="~/Admin/OrderDetail">
+                        <i class="fas fa-map-marker-alt"></i>Order
+                    </a>
+                </li>
+
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-desktop"></i>Product
+                    </a>
+                    <ul class="active list-unstyled navbar__sub-list js-sub-list">
+                        @foreach (var PCategory in productCategory)
+                        {
+                            if (gg == 1)
+                            {
+                                <li>
+                                    <a href="~/Admin/Product/">All</a>
+                                </li>
+                            }
+                            <li>
+                                <a href="~/Admin/Product/ProductInCategory/@PCategory.Id">@PCategory.Name</a>
+                            </li>
+                            gg = gg + 1;
+                        }
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="~/Admin/AnswerQuestion">
+                        <i class="fas fa-graduation-cap"></i>Answer Question
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>

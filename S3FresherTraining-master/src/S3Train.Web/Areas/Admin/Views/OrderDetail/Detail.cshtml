@@ -1,0 +1,238 @@
+﻿@model S3Train.Web.Models.OrderDetailsItemViewModels
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var oder = ViewBag.Order;
+    var oderDetail = ViewBag.OrderDetailByOrder;
+    var listName = ViewBag.ListName;
+    var listPrice = ViewBag.ListPrice;
+}
+
+<h2>Detail</h2>
+
+<div>
+    <h4>OrderDetailsItemViewModels</h4>
+    <hr />
+    <div>
+        <div class="col-12 card" style="border:1px solid blue ;background-color: white;" id="row_item.Id">
+            <div class="row" style="background-color:blueviolet">
+                <p style="padding-left:10px;color:white">
+                    Thông tin khách hàng
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <div>
+                        @Html.DisplayNameFor(item => item.ShipName)
+                    </div>
+                    <br />
+                    <div>
+                        @Html.DisplayNameFor(item => item.ShipMobile)
+                    </div>
+                    <br />
+                    <div>
+                        @Html.DisplayNameFor(item => item.ShipAddress)
+                    </div>
+                </div>
+                <div class="col-9">
+                        <div>
+                            @oder.ShipName
+                        </div>
+                        <br />
+                        <div>
+                            @oder.ShipMobile
+                        </div>
+                        <br />
+                        <div>
+                            @oder.ShipAddress
+                        </div>
+
+                </div>
+            </div>
+            <div class="row">
+
+            </div>
+
+            @*<div class="text-right">
+                    <div class="dropdown dropleft">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="height:32px">
+                            Thông tin
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Trả lời : @countAnswer </a>
+                            <a class="dropdown-item" href="#">Đăng bởi : @question.CreateBy</a>
+                            <a class="dropdown-item" href="#">Ngày đăng : @question.CreateDate</a>
+                        </div>
+
+                    </div>
+                </div>*@
+            <br />
+
+        </div>
+    </div>
+
+    <div>
+        <div class="col-12 card" style="border:1px solid blue ;background-color: white;" id="row_item.Id">
+            <div class="row" style="background-color:blueviolet">
+                <p style="padding-left:10px;color:white">
+                    Chi tiết đơn hàng
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <div>
+                        STT
+                    </div>
+                    @for (int i = 1; i <= oderDetail.Count; i++)
+                    {
+                        <div>
+                            @i
+                        </div>
+                        <br />
+                    }
+
+                    <br />
+
+                    @*<br />
+                    @*<div>
+                        2
+                    </div>
+                    <br />
+                    <div>
+                        3
+                    </div>
+                    <br />
+                    <div>
+                        4
+                    </div>*@
+                </div>
+                <div class="col-3">
+                    <div>
+                        Tên sản phẩm
+                    </div>
+                    @foreach (var item in listName)
+                    {
+                        <div>
+                            @item
+                        </div>
+                        <br />
+                    }
+                    <br />
+                    @*<div>
+            Sam Sung S10
+        </div>
+        <br />
+        <div>
+            Iphone 11 XS Max
+        </div>
+        <br />
+        <div>
+            Tablet Apple
+        </div>
+        <br />
+        <div>
+            Xixaomi 10 Note
+        </div>*@
+                </div>
+
+                <div class="col-2">
+                    <div>
+                        Đơn giá
+                    </div>
+                    @foreach (var item in listPrice)
+                    {
+                        <div>
+                            @item
+                        </div>
+                        <br />
+                    }
+
+                    @*<br />
+                    <div>
+                        100$
+                    </div>
+                    <br />
+                    <div>
+                        40$
+                    </div>
+                    <br />
+                    <div>
+                        50$
+                    </div>*@
+                </div>
+                <div class="col-2">
+                    <div>
+                        Số lượng
+                    </div>
+                    @foreach (var item in oderDetail)
+                    {
+                        <div>
+                            @item.Quantity
+                        </div>
+                        <br />
+                    }
+
+
+                    @*<div>
+            2
+        </div>
+        <br />
+        <div>
+            1
+        </div>
+        <br />
+        <div>
+            1
+        </div>*@
+                </div>
+                <div class="col-3">
+                    <div>
+                        Thành tiền
+                    </div>
+                    @foreach (var item in oderDetail)
+                    {
+                        <div>
+                            @item.Price
+                        </div>
+                        <br />
+                    }
+
+                    @*<div>
+                        200$
+                    </div>
+                    <br />
+                    <div>
+                        40$
+                    </div>
+                    <br />
+                    <div>
+                        50$
+                    </div>*@
+                </div>
+            </div>
+            <div class="row">
+
+            </div>
+
+            @*<div class="text-right">
+                    <div class="dropdown dropleft">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="height:32px">
+                            Thông tin
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Trả lời : @countAnswer </a>
+                            <a class="dropdown-item" href="#">Đăng bởi : @question.CreateBy</a>
+                            <a class="dropdown-item" href="#">Ngày đăng : @question.CreateDate</a>
+                        </div>
+
+                    </div>
+                </div>*@
+            <br />
+
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

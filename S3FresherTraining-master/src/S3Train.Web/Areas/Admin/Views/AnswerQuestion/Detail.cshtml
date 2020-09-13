@@ -1,0 +1,114 @@
+﻿@model S3Train.Web.Models.AnswerViewModels
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int countAnswer = ViewBag.CountAnswer;
+    var answer = ViewBag.answer;
+    var question = ViewBag.question;
+}
+@section scripts
+{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script> <!--Xóa Ajax-->
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <div class="col-12 card" style="border:1px solid blue ;background-color: white;" id="row_item.Id">
+            <div class="row" style="background-color:blueviolet">
+                <p style="padding-left:10px;color:white">
+                    @question.Title
+                </p>
+            </div>
+            <div class="row">
+                <p style="padding-left:10px">
+                    @question.Content
+                </p>
+            </div>
+            <div class="text-right">
+                <div class="dropdown dropleft">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="height:32px">
+                        Thông tin
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Trả lời : @countAnswer </a>
+                        <a class="dropdown-item" href="#">Đăng bởi : @question.CreateBy</a>
+                        <a class="dropdown-item" href="#">Ngày đăng : @question.CreateDate</a>
+                    </div>
+
+                </div>
+            </div>
+            <br />
+
+        </div>
+    </div>
+
+    foreach (var item in answer)
+    {
+        <div class="col-12 card" style="border:1px solid red ;background-color: white;" id="row_@item.Id">
+            <div class="row">
+                <p style="padding-left:10px">
+                    @item.Content
+                </p>
+            </div>
+            <div class="text-right">
+                <div class="dropdown dropleft">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="height:32px">
+                        Thông tin
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Đăng bởi : @item.CreateBy</a>
+                        <a class="dropdown-item" href="#">Ngày đăng : @item.CreateDate </a>
+                    </div>
+                    <button type="button" class="btn btn-danger" style="height:32px">
+                        @Ajax.ActionLink("Xóa", "Delete", new { @id = item.Id }, new AjaxOptions
+                                  {
+                                      Confirm = "Bạn có muốn xóa ",
+                                      OnComplete = "$('#row_" + @item.Id + "').remove();",
+                                      HttpMethod = "POST",
+
+                                  }, new { @style = "color:grey;color:white" })
+                    </button>
+                </div>
+
+            </div>
+            <br />
+
+        </div>
+    }
+
+
+    <div>
+        <div class="col-12 card" style="border:1px solid blue ;background-color: white;" id="row_item.Id">
+            <div class="row" style="background-color:blueviolet">
+                <p style="padding-left:10px;color:white">
+                    TRẢ LỜI CÂU HỎI
+                </p>
+            </div>
+            <div class="row">
+                <p style="padding-left:10px;width:100%">
+                    @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" }, @style = "width:99%;border:1px solid blue ;margin-top:10px;height:100px" })
+
+                </p>
+            </div>
+            <div>
+                <button class="btn btn-primary" type="submit">
+                    <p style="height:16px">TRẢ LỜI</p>
+                </button>
+            </div>
+
+            <br />
+
+        </div>
+    </div>
+
+}
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <a href="~/Admin/AnswerQuestion">
+                <p class="btn btn-outline-secondary">
+                    <i class="fa fa-reply"></i>&nbsp;Back to list
+                </p>
+            </a>
+        </div>
+    </div>

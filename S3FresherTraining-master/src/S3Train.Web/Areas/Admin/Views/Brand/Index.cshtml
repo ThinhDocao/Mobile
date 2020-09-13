@@ -1,0 +1,165 @@
+﻿@model IPagedList<S3Train.Web.Models.BrandVIewModels>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var product = ViewBag.product;
+}
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script> <!--Xóa Ajax-->
+}
+
+@using PagedList.Mvc;
+@using PagedList;
+
+@*<div class="row">
+        <h4>@Html.DisplayNameFor(modal =>modal.Username)</h4>
+        <br />
+        @foreach (var user in Model)
+        {
+            <p>
+                <strong>
+                    @Html.DisplayFor(modal => user.Username) <br />
+                    @user.Email<br />
+                    @user.RoleName
+                </strong>
+            </p>
+            <br />
+        }
+
+    </div>*@
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- DATA TABLE -->
+        <h3 class="title-5 m-b-35">Brand</h3>
+        <div class="table-data__tool">
+            <div class="table-data__tool-left">
+                <div class="rs-select2--light rs-select2--md">
+                    <form class="form-header" action="" method="POST">
+                        @using (Html.BeginForm("Index", "Brand", FormMethod.Get))
+                        {
+                            <input style="min-width:140%" class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                            <button class="au-btn--submit" type="submit" style="background:#aaa" name="submit" value="search">
+                                <i class="zmdi zmdi-search"></i>
+                            </button>
+                        }
+                    </form>
+                </div>
+
+            </div>
+            <div class="table-data__tool-right">
+                <a href="~/Admin/Brand/Create" class="au-btn au-btn-icon au-btn--green au-btn--small" id="btnCreate">
+                    <i class="zmdi zmdi-collection-add"></i>Create New
+                </a>
+
+            </div>
+        </div>
+        <div class="table-responsive table-responsive-data2">
+            <table class="table table-data2">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(modal => modal.First().Logo)</th>
+                        <th>@Html.DisplayNameFor(modal => modal.First().Name)</th>
+                        <th>@Html.DisplayNameFor(modal => modal.First().ModifyDate)</th>
+                        <th>Count</th>
+                        <th>@Html.DisplayNameFor(modal => modal.First().Status)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        int f = 0;
+                        foreach (var pro in product)
+                        {
+                            if (pro.BrandID == item.Id)
+                            {
+                                f = f + 1;
+                            }
+                        }
+                        <tr class="tr-shadow" id="row_@item.Id">
+                            <td>
+                                <img src="@item.Logo" style="height:15%" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ModifyDate)
+                            </td>
+                            <td>
+                                @f
+                            </td>
+                            <td>
+                                <a href="#" class="btn-tiveac" data-id="@item.Id">
+                                    @if (item.Status == true)
+                                    {
+                                        <p>open</p>
+                                    }
+                                    @if (item.Status == false)
+                                    {
+                                        <p>lock</p>
+                                    }
+                            </td>
+                            <td>
+                                <div class="table-data-feature">
+
+                                    <a href="~/Admin/Brand/Detail/@item.Id" class="item" data-toggle="tooltip" data-placement="top" title="Detail">
+                                        <i class="zmdi zmdi-mail-send"></i>
+
+                                    </a>
+                                    <a href="~/Admin/Brand/Edit/@item.Id" class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                        <i class="zmdi zmdi-edit"></i>
+                                    </a>
+                                    
+
+                                        @Ajax.ActionLink("X", "Delete", new { @id = item.Id }, new AjaxOptions
+                                   {
+                                       Confirm = "Bạn có muốn xóa",
+                                       OnComplete = "$('#row_" + @item.Id + "').remove()",
+                                       HttpMethod = "POST"
+                                   },
+                                       new { @title = "Delete"})
+                                    
+
+                                    @*@Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            @*@Html.PagedListPager(Model, i => Url.Action("Index", new { i, search = Request.QueryString["search"] }),
+                new PagedListRenderOptions
+                {
+                    LiElementClasses = new string[] { "page-link" }*@
+
+        </div>
+        <!-- END DATA TABLE -->
+    </div>
+</div>
+@Html.PagedListPager(Model, i => Url.Action("Index", "ProductCategory", new { i, search = Request.QueryString["search"] }),
+               new PagedListRenderOptions
+               {
+                   LiElementClasses = new string[] { "page-link" }
+               })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

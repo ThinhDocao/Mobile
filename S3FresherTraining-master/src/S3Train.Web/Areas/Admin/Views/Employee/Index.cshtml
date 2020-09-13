@@ -1,0 +1,146 @@
+﻿@model IPagedList<S3Train.Models.UserViewModel>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@using PagedList.Mvc;
+@using PagedList;
+
+@*<div class="row">
+    <h4>@Html.DisplayNameFor(modal =>modal.Username)</h4>
+    <br />
+    @foreach (var user in Model)
+    {
+        <p>
+            <strong>
+                @Html.DisplayFor(modal => user.Username) <br />
+                @user.Email<br />
+                @user.RoleName
+            </strong>
+        </p>
+        <br />
+    }
+    
+</div>*@
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- DATA TABLE -->
+        <h3 class="title-5 m-b-35">Employee</h3>
+        <div class="table-data__tool">
+            <div class="table-data__tool-left">
+                <div class="rs-select2--light rs-select2--md">
+                    <form class="form-header" action="" method="POST">
+                        @using (Html.BeginForm("Index", "Employee", FormMethod.Get))
+                        {
+                            <input style="min-width:140%" class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                            <button class="au-btn--submit" type="submit" style="background:#aaa" name="submit" value="search">
+                                <i class="zmdi zmdi-search"></i>
+                            </button>
+                        }
+                    </form>
+                </div>
+                
+            </div>
+            <div class="table-data__tool-right">
+                <a href="~/Admin/Employee/Create" class="au-btn au-btn-icon au-btn--green au-btn--small" id="btnCreate">
+                    <i class="zmdi zmdi-collection-add"></i>Create New
+                </a>
+
+                <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                    <select class="js-select2" name="type">
+                        <option selected="selected">Export</option>
+                        <option value="">Option 1</option>
+                        <option value="">Option 2</option>
+                    </select>
+                    <div class="dropDownSelect2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive table-responsive-data2">
+            <table class="table table-data2">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(modal => modal.First().Name)</th>
+                        <th>@Html.DisplayNameFor(modal =>modal.First().Email)</th>
+                        <th>@Html.DisplayNameFor(modal =>modal.First().ModifyDate)</th>
+                        <th>@Html.DisplayNameFor(modal => modal.First().status)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="tr-shadow">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ModifyDate)
+                            </td>
+                            <td>
+                                <a href="#" class="btn-activeEmployee" data-id="@item.Id"> @(item.status ? "Kích hoạt" : "Khóa") </a>
+                            </td>
+                            <td>
+                                <div class="table-data-feature">
+                                    <a href="~/Admin/Employee/ResetPassword/@item.Id" class="item" data-toggle="tooltip" data-placement="top" title="Reset Password">
+                                        <i class="zmdi zmdi-account-circle"></i>
+
+                                    </a>
+
+                                    <a href="~/Admin/Employee/Details/@item.Id" class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                        <i class="zmdi zmdi-mail-send"></i>
+
+                                    </a>
+                                    <a href="~/Admin/Employee/Edit/@item.Id" class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                        <i class="zmdi zmdi-edit"></i>
+                                    </a>
+                                    <a href="~/Admin/Employee/Delete/@item.Id" class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                        <i class="zmdi zmdi-delete"></i>
+                                    </a>
+
+                                    @*@Html.ActionLink("Edit", "Edit", new { id = item.Id })
+        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+               
+                @*@Html.PagedListPager(Model, i => Url.Action("Index", new { i, search = Request.QueryString["search"] }),
+    new PagedListRenderOptions
+    {
+        LiElementClasses = new string[] { "page-link" }*@
+    
+            </div>
+        <!-- END DATA TABLE -->
+    </div>
+</div>
+@Html.PagedListPager(Model, i => Url.Action("Index", "Employee", new { i, search = Request.QueryString["search"] }),
+               new PagedListRenderOptions
+               {
+                   LiElementClasses = new string[] { "page-link" }
+               })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

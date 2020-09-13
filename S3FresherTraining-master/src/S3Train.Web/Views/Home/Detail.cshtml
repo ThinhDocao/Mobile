@@ -1,0 +1,556 @@
+﻿@model S3Train.Models.ProductViewModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/Layout2.cshtml";
+    var relatedProduct= ViewBag.relatedProduct;
+    
+    
+    var moreImage = ViewBag.MoreImage;
+}
+@section scripts{
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+
+}
+
+
+
+<section class="type0">
+    <ul class="breadcrumb">
+        <li>
+            <a href="~/Views/Home/Index.cshtml" title="Trang chủ">Trang chủ</a>
+            <span>></span>
+        </li>
+        <li>
+            <a href="~/DienThoai">Điện thoại</a>
+            <span>></span>
+        </li>
+        <li class="brand">
+            <a href="/Iphone"> Iphone (Apple)</a>
+        </li>
+    </ul>
+    <div class="row" style="padding-left:30px">
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    <div class="row" style="padding-left:14px">
+                        <h3>Điện thoại iPhone 11 Pro Max 64GB</h3>
+                        <div class="col-md-4">
+                            <div class="col text-warning">
+                                <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                                <a href="#danhgia">8 đánh giá</a>
+                                <div class="fb-like">
+                                    <div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div></div></div></div>
+                                    <div class="fb-like fb_iframe_widget" data-href="/dtdd/iphone-11-pro-max" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=242045172499368&amp;container_width=0&amp;href=https%3A%2F%2Fwww.thegioididong.com%2Fdtdd%2Fiphone-11-pro-max&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true"><span style="vertical-align: bottom; width: 134px; height: 20px;"><iframe name="f588e826a6fedc" width="1000px" height="1000px" title="fb:like Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://www.facebook.com/v2.4/plugins/like.php?action=like&amp;app_id=242045172499368&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D45%23cb%3Df141fcedf7dcbf%26domain%3Dwww.thegioididong.com%26origin%3Dhttps%253A%252F%252Fwww.thegioididong.com%252Ff2c452feaf0214%26relation%3Dparent.parent&amp;container_width=0&amp;href=https%3A%2F%2Fwww.thegioididong.com%2Fdtdd%2Fiphone-11-pro-max&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true" style="border: none; visibility: visible; width: 134px; height: 20px;" class=""></iframe></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+                <img src="@Model.Image" alt="Điện thoại Samsung Galaxy S10 Lite" onclick="gotoGallery(-1,0);">
+                <span style="color:#666;font-size:14px;display:block;width:80%;text-align:center;margin-top:15px">Xem hình thực tế sản phẩm</span>
+
+                <div class="">
+                    <div class="columns_2">
+                        <img src="@Model.Image" width="10%" onclick="openModal();currentSlide(1)" class="hover-shadow">
+                        <span>Xem thêm @moreImage.Count ảnh</span>
+                    </div>
+                <div>
+                        @*<div class="row">
+                            <div class="column">
+                                <img src="@Model.Image" width="20%" onclick="openModal();currentSlide(1)" class="hover-shadow">
+                                <span>Xanh</span>
+                            </div>
+                            <div class="column">
+                                <img src="@Model.Image" width="20%" onclick="openModal();currentSlide(2)" class="hover-shadow">
+                                <span>Đen</span>
+                            </div>
+                            <div class="column">
+                                <img src="@Model.Image" width="20%" onclick="openModal();currentSlide(3)" class="hover-shadow">
+                                <span style="text-align-last:center">Mở hộp khuyến mãi</span>
+                            </div>
+                            <div class="column">
+                                <img src="@Model.Image" width="20%" onclick="openModal();currentSlide(4)" class="hover-shadow">
+                                <span>Hình 360độ</span>
+                            </div>
+                        </div>*@
+                        <div id="myModal" class="modalDetail">
+                            <span class="close cursor" onclick="closeModal()">&times;</span>
+                            <div class="modal-content">
+                                @for (int i = 0; i < moreImage.Count; i++)
+                                {
+                                    <div class="mySlides">
+                                        <div class="numbertext">@(i+1) / @moreImage.Count</div>
+                                        <img src="@moreImage[i]" style="padding-left:30%;width:62%">
+                                    </div>
+                                }
+
+
+                                @*<div class="mySlides">
+                                    <div class="numbertext">2 / 4</div>
+                                    <img src="@Model.Image" style="padding-left:30%;width:62%">
+                                </div>
+
+                                <div class="mySlides" style="text-align:center">
+                                    <div class="numbertext">3 / 4</div>
+                                    <img src="@Model.Image" style="padding-left:30%;width:62%">
+                                </div>
+
+                                <div class="mySlides">
+                                    <div class="numbertext">4 / 4</div>
+                                    <img src="@Model.Image" style="padding-left:30%;width:62%">
+                                </div>*@
+
+                                <!-- Next/previous controls -->
+                                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                                <!-- Caption text -->
+                                <div class="caption-container">
+                                    <p id="caption"></p>
+                                </div>
+
+                                <!-- Thumbnail image controls -->
+                                <div class="row">
+                                    @for (int i = 0; i < moreImage.Count; i++)
+                                    {
+                                        <div class="column">
+                                            <img class="demo" src="@moreImage[i]" onclick="currentSlide(@(i+1))" alt="">
+                                        </div>
+                                    }
+                                    @*<div class="column">
+                                        <img class="demo" src="//cdn.tgdd.vn/Products/Images/42/194251/samsung-galaxy-s10-lite-xanh-200x200-180x120.png" onclick="currentSlide(1)" alt="">
+                                    </div>
+
+                                    <div class="column">
+                                        <img class="demo" src="//cdn.tgdd.vn/Products/Images/42/194251/samsung-galaxy-s10-lite-xanh-200x200-180x120.png" onclick="currentSlide(2)" alt="Snow">
+                                    </div>
+
+                                    <div class="column">
+                                        <img class="demo" src="//cdn.tgdd.vn/Products/Images/42/194251/samsung-galaxy-s10-lite-xanh-200x200-180x120.png" onclick="currentSlide(3)" alt="Mountains">
+                                    </div>
+
+                                    <div class="column">
+                                        <img class="demo" src="//cdn.tgdd.vn/Products/Images/42/194251/samsung-galaxy-s10-lite-xanh-200x200-180x120.png" onclick="currentSlide(4)" alt="Lights">
+                                    </div>*@
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-4">
+                <div>
+                    <strong>14.990.000đ</strong>
+                    <label class="badge badge-warning">Trả góp 0%</label>
+                </div>
+                <div class="border border-secondary">
+                    <span>KHUYẾN MÃI</span><br />
+                    <i class="far fa-check-circle">&nbsp;Cơ hội trúng tiền mặt, tổng trị giá lên đến 1.8 tỷ</i>
+                    <br />
+                    <a href="#">Xem chi tiết</a>
+                    <br />
+
+                </div>
+                <label class="checkbox-inline"><input type="checkbox" value="">Yêu cầu nhân viên kỹ thuật giao hàng: hỗ trợ copy danh bạ, hướng dẫn sử dụng máy mới, giải đáp thắc mắc sản phẩm.</label>
+                <br />
+                <a href="/them-gio-hang/@Model.Id-1" class="btn btn-danger" style="width:100%;height:auto;font-size:20px">
+                    <b>Mua ngay</b><br />
+                    <span>Giao tận nơi hoặc nhận tại siêu thị</span>
+                </a>
+                <br />
+                <div>Gọi đặt mua: 1800.1060 (miễn phí - 7:30-22:00)</div>
+            </div>
+
+            <div class="col">
+                <i class="fas fa-car-side">&nbsp;Miễn phí vận chuyển</i>
+                <br />
+                <div class="border border-secondary">
+                    <span class="	fas fa-box-open">Trong hộp có<a href="#"> Cáp,Cây lấy sim,Hộp,Ốp lưng,Tai nghe,Sạc,Sách hướng dẫn</a></span>
+                    <br />
+                    <i class="far fa-clock">Bảo hành chính hãng 12 tháng.</i>
+                    <br />
+                    <i class="fas fa-bug" style="color:darkblue">Lỗi là đổi mới trong 1 tháng tại hơn 2026 siêu thị toàn quốc</i>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <div class="row" style="padding-left:14px">
+                    <h3>Đặc điểm nổi bật của Samsung Galaxy S10 Lite</h3>
+                </div>
+
+                <div id="demo" class="carousel slide" data-ride="carousel">
+
+                    <!-- Indicators -->
+                    <ul class="carousel-indicators">
+                        <li data-target="#demo" data-slide-to="0" class="active"></li>
+                        <li data-target="#demo" data-slide-to="1"></li>
+                        <li data-target="#demo" data-slide-to="2"></li>
+                        <li data-target="#demo" data-slide-to="3"></li>
+                    </ul>
+
+                    <!-- The slideshow -->
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="@Model.Image" alt="Los Angeles">
+                            <div class="carousel-indicators"></div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://cdn.tgdd.vn/Products/Images/42/213588/Slider/vi-vn-realme-5s-tongquan.jpg" alt="Chicago">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://cdn.tgdd.vn/Products/Images/42/213588/Slider/vi-vn-realme-5s-4camera.jpg" alt="New York">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://cdn.tgdd.vn/Products/Images/42/213588/Slider/vi-vn-realme-5s-manhinh.jpg" alt="New York">
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#demo" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </a>
+
+
+
+
+                </div>
+
+
+                <div>
+                    <h4>Thêm 1 sự lựa chọn cho tầm giá dưới 5 triệu, chiếc điện thoại&nbsp;<a href="https://www.thegioididong.com/dtdd/realme-5s" title="Realme 5s">Realme 5s</a>&nbsp;hội đủ nhiều phẩm chất cho một&nbsp;<a href="https://www.thegioididong.com/dtdd" title="smartphone">smartphone</a>&nbsp;"ngon" phù hợp cho nhiều đối tượng sử dụng, đặc biệt nhất là yêu thích nhiếp ảnh.</h4>
+                    <h5>Bộ 4 camera khủng 48 MP</h5>
+                    <img src="https://cdn.tgdd.vn/Products/Images/42/213588/realme-5s-5.jpg" style="width:100%" />
+                    <button onclick="MyReadMore()" id="btnReadMore">Read more</button>
+                    <br />
+                    <div id="ReadMore" style="display:none">
+                        Lorem ipsum dolor text....
+                        Lorem ipsum dolor text....
+                        Lorem ipsum dolor text....
+                        Lorem ipsum dolor text....
+                    </div>
+                </div>
+                <hr />
+                <div class="row" style="padding-left:14px">
+                    <h3>So sánh các sản phẩm tương tự</h3>
+                </div>
+                <div class="row">
+                    @foreach (var item in relatedProduct)
+                        {
+                            <div class="col-3">
+                                <a href="/chi-tiet/@item.MetaTitle/@item.Id">
+                                    <img src="@item.Image" width="100%" />
+                                    <p style="text-align:center"> @item.Name</p>
+                                    <p style="text-align:center"> @item.Price</p>
+                                </a>
+                            </div>
+                        }
+                </div>
+                <hr />
+                <div class="row" style="padding-left:14px">
+                    <h3>Thắc mắc và giải đáp</h3>
+
+                </div>
+                <div>
+                    asdasdasd
+                </div>
+            </div>
+            <div class="col">
+                <div class="row" style="padding-left:14px">
+                    <h3>Thông số kỹ thuật</h3>
+                </div>
+                <div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <span>Màn hình</span>
+                            <button style="margin-left:50px">asd</button>
+                        </li>
+                        <li class="list-group-item">
+                            Hệ điều hành
+                        </li>
+                        <li class="list-group-item">
+                            Andoird
+                        </li>
+                        <li class="list-group-item">
+                            <!-- Modal -->
+                            <button type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#scrollmodal">
+                                Xem thêm cấu hình chi tiết
+                            </button>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<div class="modal fade" id="scrollmodal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scrollmodalLabel">Scrolling Long Content Modal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img src="//cdn.tgdd.vn/Products/Images/42/212212/Kit/xiaomi-redmi-8-64gb-note.jpg" width="100%" />
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <span>Màn hình</span>
+                    </div>
+                    <div class="col">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        <span style="border-left:5px solid aqua">&nbsp;Công nghệ màn hình</span>
+                    </div>
+                    <div class="col" style="border-right:5px solid aqua">
+                        <a href="#">IPS LCD IPS LCD    </a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-5">
+                        <span style="border-left:5px solid aqua">&nbsp;Công nghệ màn hình</span>
+                    </div>
+                    <div class="col" style="border-right:5px solid aqua">
+                        <a href="#">IPS LCsdD IPS LCD    </a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-5">
+                        <span style="border-left:5px solid aqua"> &nbsp;Công nghệ màn hình</span>
+                    </div>
+                    <div class="col" style="border-right:5px solid aqua">
+                        <a href="#">IPS LCD IPS LCD </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function openModal() {
+        document.getElementById("myModal").style.display = "block";
+    }
+
+    // Close the Modal
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+
+
+
+
+
+
+
+    function MyReadMore() {
+        var moreText = document.getElementById("ReadMore");
+        var btnText = document.getElementById("btnReadMore");
+
+        if (moreText.style.display === "none") {
+            moreText.style.display = "inline";
+            btnText.innerHTML = "Read less";
+        } else {
+            moreText.style.display = "none";
+            btnText.innerHTML = "Read more";
+        }
+    }
+
+
+</script>
+<style>
+
+
+    .row > .column {
+        padding: 0 8px;
+    }
+
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    /* Create four equal columns that floats next to eachother */
+    .column {
+        float: left;
+        width: 25%;
+    }
+
+    /* The Modal (background) */
+    .modalDetail {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 40px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: black;
+    }
+
+    /* Modal Content */
+    .modalDetail-content {
+        position: relative;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 0;
+        width: 90%;
+        max-width: 1200px;
+    }
+
+    /* The Close Button */
+    .close {
+        color: white;
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #999;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    /* Hide the slides by default */
+    .mySlides {
+        display: none;
+    }
+
+    /* Next & previous buttons */
+    .prev,
+    .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -50px;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    /* Position the "next button" to the right */
+    .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+    }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+    /* Number text (1/3 etc) */
+    .numbertext {
+        color: #f2f2f2;
+        font-size: 12px;
+        padding: 8px 12px;
+        position: absolute;
+        top: 0;
+    }
+
+    /* Caption text */
+    .caption-container {
+        text-align: center;
+        background-color: black;
+        padding: 2px 16px;
+        color: white;
+    }
+
+    img.demo {
+        opacity: 0.6;
+    }
+
+    .active,
+    .demo:hover {
+        opacity: 1;
+    }
+
+    img.hover-shadow {
+        transition: 0.3s;
+    }
+
+    .hover-shadow:hover {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+</style>
+
+
+
+
+
+

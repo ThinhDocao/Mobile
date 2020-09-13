@@ -1,0 +1,14 @@
+﻿@foreach (var menuType in ViewBag.MenuType)
+{
+    foreach (var item in ViewBag.Menu)
+    {
+        if (menuType.Id == item.MenuTypeID && menuType.Name == "Menu giá")
+        {
+            <li class="nav-item">
+                <a class="nav-link" href="/dienthoai/@item.Text">@item.Text</a>
+            </li>
+        }
+
+    }
+}
+

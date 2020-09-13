@@ -1,0 +1,282 @@
+﻿@model IPagedList<S3Train.Models.ProductViewModel>
+@{
+    ViewBag.Title = "ProductInCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var productCategory = ViewBag.Productcategory;
+    var brand = ViewBag.brand;
+}
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script> <!--Xóa Ajax-->
+    <script src="/Assets/productController.js"></script>
+}
+
+
+@using PagedList.Mvc;
+@using PagedList;
+
+<div class="row">
+    <div class="col-4">
+        <h1>@productCategory.Name </h1>
+    </div>
+    <div class="col-4 card" style="margin-bottom:0px;border-radius:40px">
+        <div>
+            <div class="rs-select2--light rs-select2--md">
+                <form class="form-header" action="" method="POST">
+                    @using (Html.BeginForm("Index", "Product", FormMethod.Get))
+                    {
+                        <input style="min-width:158%;border:0px solid #e5e5e5" class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                        <button class="au-btn--submit" type="submit" style="background:#aaa" name="submit" value="search">
+                            <i class="zmdi zmdi-search"></i>
+                        </button>
+                    }
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="text-right">
+            <a href="~/Admin/Product/Create" class="au-btn au-btn-icon  au-btn--small" style="background-color:coral" id="btnCreate">
+                <i class="zmdi zmdi-collection-add"></i>Create New
+            </a>
+        </div>
+
+    </div>
+</div>
+<hr />
+@foreach (var brd in brand)
+{
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            if (brd.Id == item.Brand_Id)
+            {
+
+                if (item.Status == true)
+                {
+                    <div class="col-4 card" style="border:3px solid rgba(0,0,0,.125) ; border-radius:20px" id="row_@item.Id">
+                        <div class="row">
+                            <div class="col-9" style="padding-left:20px;padding-top:10px">
+                                <a href="#"><h4 style="color:blueviolet;font-size:medium"> @item.Name</h4> </a>
+
+                            </div>
+
+                            <div class="col-3 text-right">
+                                <a href="#" class="btn-active" data-id="@item.Id" style="color:grey" title="open" id="title_@item.Id">
+                                    <i class="zmdi zmdi-globe"></i>
+
+                                </a>
+                                <a href="~/Admin/Product/Delete/@item.Id" class="item" data-toggle="tooltip" data-placement="top" title="Delete" style="color:black">
+                                    @Ajax.ActionLink("X", "Delete", new { @id = item.Id }, new AjaxOptions
+                               {
+                                   Confirm = "Bạn có muốn xóa: " + item.Name,
+                                   OnComplete = "$('#row_" + @item.Id + "').remove();",
+                                   HttpMethod = "POST",
+
+                               }, new { @style = "color:grey" })
+                                </a>
+                            </div>
+
+                        </div>
+
+
+
+
+                        <br />
+                        <div class="row">
+
+                            <div class="col-6" style="height:auto">
+                                <img src="@item.Image" />
+                            </div>
+                            <div class="col-6">
+                                <div>
+                                    <a href="">Price</a>
+                                </div>
+                                <div>
+                                    <i>@item.Price $</i>
+                                </div>
+                                <div>
+                                    <a href="">Promotion Price</a>
+                                </div>
+                                <div>
+                                    <i>@item.PromotionPrice $</i>
+                                </div>
+                                <div>
+                                    <a href="">Create Date</a>
+                                </div>
+                                <div style="font-size:small">
+                                    <i>@item.CreateDate</i>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+
+
+                                <a href="#" data-id="@item.Id" class="btn-images"><i class="zmdi zmdi-image"></i></a>
+
+
+                            </div>
+                            <div class="col-6">
+                                <div class="text-right" style="font-size:larger">
+
+                                    <a href="~/Admin/Product/Detail/@item.Id" class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                        <i class="zmdi zmdi-mail-send"></i>
+
+                                    </a>
+                                    <a href="~/Admin/Product/Edit/@item.Id" class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                        <i class="zmdi zmdi-edit"></i>
+                                    </a>
+                                    @*<a href="~/Admin/Product/Delete/@item.Id" class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                             @Ajax.ActionLink(" ","Delete",new { @id=item.Id }, new AjaxOptions
+                                        {
+                                            Confirm="Bạn có muốn xóa",
+                                            OnComplete="$('#row_"+@item.Id+"').remove()",
+                                            HttpMethod="Delete"
+                                        },
+                                            new { @class = "zmdi zmdi-delete", @title = "Delete" })
+                                         </a>*@
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+                if (item.Status == false)
+                {
+                    <div class="col-4 card" style="border:3px solid rgba(0,0,0,.125) ; border-radius:20px;background-color:#e4e8e4" id="row_@item.Id">
+                        <div class="row">
+                            <div class="col-9" style="padding-left:20px;padding-top:10px">
+                                <a href="#"><h4 style="color:blueviolet;font-size:medium"> @item.Name</h4> </a>
+
+                            </div>
+
+                            <div class="col-3 text-right">
+                                <a href="#" class="btn-active" data-id="@item.Id" style="color:grey" title="lock" id="title_@item.Id">
+                                    <i class="zmdi zmdi-block-alt"></i>
+                                </a>
+                                <a href="~/Admin/Product/Delete/@item.Id" class="item" data-toggle="tooltip" data-placement="top" title="Delete" style="color:black">
+                                    @Ajax.ActionLink("X", "Delete", new { @id = item.Id }, new AjaxOptions
+                               {
+                                   Confirm = "Bạn có muốn xóa: " + item.Name,
+                                   OnComplete = "$('#row_" + @item.Id + "').remove();",
+                                   HttpMethod = "POST",
+
+                               }, new { @style = "color:grey" })
+                                </a>
+                            </div>
+
+                        </div>
+
+
+
+
+                        <br />
+                        <div class="row">
+
+                            <div class="col-6" style="height:auto">
+                                <img src="@item.Image" />
+                            </div>
+                            <div class="col-6">
+                                <div>
+                                    <a href="">Price</a>
+                                </div>
+                                <div>
+                                    <i>@item.Price $</i>
+                                </div>
+                                <div>
+                                    <a href="">Promotion Price</a>
+                                </div>
+                                <div>
+                                    <i>@item.PromotionPrice $</i>
+                                </div>
+                                <div>
+                                    <a href="">Create Date</a>
+                                </div>
+                                <div style="font-size:small">
+                                    <i>@item.CreateDate</i>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+
+
+                                <a href="#" data-id="@item.Id" class="btn-images"><i class="zmdi zmdi-image"></i></a>
+
+
+                            </div>
+                            <div class="col-6">
+                                <div class="text-right" style="font-size:larger">
+
+                                    <a href="~/Admin/Product/Detail/@item.Id" class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                        <i class="zmdi zmdi-mail-send"></i>
+
+                                    </a>
+                                    <a href="~/Admin/Product/Edit/@item.Id" class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                        <i class="zmdi zmdi-edit"></i>
+                                    </a>
+                                    @*<a href="~/Admin/Product/Delete/@item.Id" class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                             @Ajax.ActionLink(" ","Delete",new { @id=item.Id }, new AjaxOptions
+                                        {
+                                            Confirm="Bạn có muốn xóa",
+                                            OnComplete="$('#row_"+@item.Id+"').remove()",
+                                            HttpMethod="Delete"
+                                        },
+                                            new { @class = "zmdi zmdi-delete", @title = "Delete" })
+                                         </a>*@
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            }
+        }
+    </div>
+}
+@Html.PagedListPager(Model, i => Url.Action("ProductInCategory", "Product", new { i, search = Request.QueryString["search"] }),
+   new PagedListRenderOptions
+   {
+       LiElementClasses = new string[] { "page-link" }
+   })
+
+
+
+<!-- Modal -->
+<div id="imagesManage" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">MoreImage</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <div id="imageList" style="padding-left:5px">
+
+                </div>
+                <div class="clear"></div>
+                <input type="button" id="btnChooImages" class="btn btn-primary" value="Chọn ảnh" />
+                <input type="hidden" id="hidProductID" value="0" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btnSaveImages">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+

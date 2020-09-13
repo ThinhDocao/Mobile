@@ -1,0 +1,90 @@
+﻿@model IEnumerable<S3Train.Web.Models.RoleViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- DATA TABLE -->
+        <h3 class="title-5 m-b-35">data table</h3>
+        <div class="table-data__tool">
+            <div class="table-data__tool-left">
+                <div class="rs-select2--light rs-select2--md">
+                    <select class="js-select2" name="property">
+                        <option selected="selected">All Properties</option>
+                        <option value="">Option 1</option>
+                        <option value="">Option 2</option>
+                    </select>
+                    <div class="dropDownSelect2"></div>
+                </div>
+                <div class="rs-select2--light rs-select2--sm">
+                    <select class="js-select2" name="time">
+                        <option selected="selected">Today</option>
+                        <option value="">3 Days</option>
+                        <option value="">1 Week</option>
+                    </select>
+                    <div class="dropDownSelect2"></div>
+                </div>
+                <button class="au-btn-filter">
+                    <i class="zmdi zmdi-filter-list"></i>filters
+                </button>
+            </div>
+            <div class="table-data__tool-right">
+                <a href="Role/Create" class="au-btn au-btn-icon au-btn--green au-btn--small" id="btnCreate">
+                    <i class="zmdi zmdi-plus"></i>Create New
+                </a>
+
+                <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                    <select class="js-select2" name="type">
+                        <option selected="selected">Export</option>
+                        <option value="">Option 1</option>
+                        <option value="">Option 2</option>
+                    </select>
+                    <div class="dropDownSelect2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive table-responsive-data2">
+            <table class="table table-data2">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Name)</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+@foreach (var item in Model)
+{
+                    <tr class="tr-shadow">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            <div class="table-data-feature">
+                                <a href="Role/Details/@item.Id" class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                    <i class="zmdi zmdi-mail-send"></i>
+                                    
+                                </a>
+                                <a href="Role/Edit/@item.Id" class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <i class="zmdi zmdi-edit"></i>
+                                </a>
+                                <a href="Role/Delete/@item.Id" class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                    <i class="zmdi zmdi-delete"></i>
+                                </a>
+                                
+                                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                            </div>
+                        </td>
+                    </tr>
+}              
+                </tbody>
+            </table>
+        </div>
+        <!-- END DATA TABLE -->
+    </div>
+</div>
+
